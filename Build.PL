@@ -5,7 +5,7 @@ use warnings;
 use Module::Build;
 
 my $builder = Module::Build->new(
-    module_name         => 'Test::HTML::Clear',
+    module_name         => 'Test::HTML::Lemon',
     license             => 'perl',
     dist_abstract       => 'a HTML test module',
     dist_author         => q{Sebastian Knapp <sk@computer-leipzig.com>},
@@ -21,7 +21,7 @@ my $builder = Module::Build->new(
         'HTML::Parser' => 0,
         'Test::Builder' => 0
     },
-    add_to_cleanup      => [ 'Test-HTML-Clear-*' ],
+    add_to_cleanup      => [ 'Test-HTML-Lemon-*' ],
     create_makefile_pl => 'traditional',
 );
 

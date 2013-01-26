@@ -1,4 +1,4 @@
-package Test::HTML::Clear;
+package Test::HTML::Lemon;
 
 require 5.008_001;
 use strict;
@@ -11,7 +11,7 @@ use parent 'Exporter';
 
 our (@EXPORT_OK, @EXPORT, $VERSION, %PARSER_OPTIONS);
 
-$VERSION = '0.01';
+$VERSION = '0.1';
 
 my $Test = Test::Builder->new;
 
@@ -134,5 +134,23 @@ sub tag_found_count {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Test::HTML::Lemon - just another HTML testing module
+
+=head1 SYNOPSIS
+
+
+=head1 LICENSE
+
+Perl has a free license, so this module shares it with this
+programming language.
+
+Copyleft 2013 by Sebastian Knapp E<lt>sk@computer-leipzig.comE<gt>
+
+
 
 

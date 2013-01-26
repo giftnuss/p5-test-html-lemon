@@ -1,2 +1,9 @@
 
 This is just another HTML test module.
+
+For now I would not call it a serious project - the reason I'started
+it is, that Test::HTML::Content does not install clean via cpan.
+The problem there is somewhere hidden in the test_diag function of 
+Test::Builder::Tester or so ...
+
+
