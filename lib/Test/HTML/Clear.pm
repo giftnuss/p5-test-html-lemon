@@ -50,6 +50,8 @@ sub _check_text {
 	  $cnt++;
 	}
   }
+
+  local $Test::Builder::Level = $Test::Builder::Level + 2;
   $Test->ok($checkcount->($cnt),$name);	
 }
 
@@ -99,11 +101,17 @@ sub _check_tag {
   my $cnt = 0;
   TAGS:
   foreach my $attributes (@tags) {
+	my %attrref = %$attrref;
 	foreach my $attr (keys %$attributes) {
-	  next TAGS unless defined $attrref->{$attr};
+	  next TAGS unless
+	    defined $attrref{$attr} &&
+	    $attrref{$attr} eq $attributes->{$attr};
+	  delete $attrref{$attr};
 	}
-    $cnt++;
+    $cnt++ unless %attrref;
   }
+  
+  local $Test::Builder::Level = $Test::Builder::Level + 2;
   $Test->ok($checkcount->($cnt),$name);
 }
 
