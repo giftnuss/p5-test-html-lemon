@@ -1,7 +1,8 @@
 Build.PL
-lib/Test/HTML/Clear.pm
+lib/Test/HTML/Lemon.pm
 MANIFEST			This list of files
 README
 t/00-prerequisites.t
 t/01_text.t
 t/02_tag.t
+t/03_tag_test.t

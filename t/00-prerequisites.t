@@ -7,5 +7,5 @@ use_ok('Test::Builder')
   or BAILOUT("The tests require Test::Builder");
 use_ok('HTML::Parser')
   or BAILOUT("The tests require HTML::TokeParser");
-use_ok('Test::HTML::Clear')
+use_ok('Test::HTML::Lemon')
   or BAILOUT("The tests require Test::HTML::Clear");

@@ -1,6 +1,6 @@
 
 use strict;
-use Test::HTML::Clear tests => 4;
+use Test::HTML::Lemon tests => 4;
 
 my $HTML1 = "<p>Hallo Welt!</p>";
 tag_found($HTML1,'p',{});

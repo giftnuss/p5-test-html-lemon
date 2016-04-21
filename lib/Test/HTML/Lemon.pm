@@ -126,7 +126,7 @@ sub tag_found {
 
 sub tag_found_count {
   my ($HTML,$tag,$attrspec,$count,$name) = @_;
-  $name ||= "found $count $tag tag." . ($count == 1 ? '' : 's'); 
+  $name ||= "found $count $tag tag" . ($count == 1 ? '' : 's') . "."; 
   _check_tag(
       sub { $_[0] == $count },
       $HTML,$tag,$attrspec,$name
