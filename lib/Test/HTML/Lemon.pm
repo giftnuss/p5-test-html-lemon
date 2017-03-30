@@ -11,7 +11,7 @@ use parent 'Exporter';
 
 our (@EXPORT_OK, @EXPORT, $VERSION, %PARSER_OPTIONS);
 
-$VERSION = '0.1';
+$VERSION = '0.2';
 
 my $Test = Test::Builder->new;
 
@@ -99,16 +99,33 @@ sub _check_tag {
   $parser->handler(start => \@tags, '@{attr}');
   $parser->parse($HTML);
   my $cnt = 0;
-  TAGS:
-  foreach my $attributes (@tags) {
-	my %attrref = %$attrref;
-	foreach my $attr (keys %$attributes) {
-	  next TAGS unless
-	    defined $attrref{$attr} &&
-	    $attrref{$attr} eq $attributes->{$attr};
-	  delete $attrref{$attr};
-	}
-    $cnt++ unless %attrref;
+  my $joker = defined($attrref) && delete($attrref->{"..."});
+  
+  if(defined($attrref)) {
+      TAGS:
+      foreach my $attributes (@tags) {
+	      my %attrref = %$attrref;
+		  unless($joker) {
+	          foreach my $attr (keys %$attributes) {
+	              next TAGS unless
+	                  defined $attrref{$attr} &&
+	                  $attrref{$attr} eq $attributes->{$attr};
+	              delete $attrref{$attr};
+	          }
+              $cnt++ unless %attrref;
+          }
+          else {
+			  foreach my $spec (keys %attrref) {
+			      next TAGS unless
+			          defined $attributes->{$spec} &&
+			          $attributes->{$spec} eq $attrref{$spec}	  
+			  }
+			  $cnt++;
+		  }
+      }
+  }
+  else {
+	  $cnt = @tags;
   }
   
   local $Test::Builder::Level = $Test::Builder::Level + 2;
@@ -143,6 +160,26 @@ Test::HTML::Lemon - just another HTML testing module
 
 =head1 SYNOPSIS
 
+=head1 DESCRIPTION
+
+
+=item C<tag_found($HTML, $tag, $attrspec, $name)>
+
+=item C<tag_found_count($HTML, $tag, $attrspec, $count, $name)>
+
+C<$HTML> - the HTML to check
+
+C<$tag> - the tag name which will be recognized
+
+C<$attrspec> - hash reference of attributes. Normaly all attributes
+must exist with the given value. If the "magic" key "..." is present
+and has a true value, than the HTML code can contain more attributes 
+as given in the spec. C<$attrspec> with value C<undef> means that the 
+attributes check is skiped.
+
+Exactly C<$count> should be found in the C<$HTML>. 
+
+C<$name> - is the optional test description.
 
 =head1 LICENSE
 
